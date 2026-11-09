@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ausgaben-Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="profile">
+        <div class="avatar">€</div>
+        <div>
+          <h2>Geld-Tracker</h2>
+          <p>Meine Finanzen</p>
+        </div>
+      </div>
+      <nav>
+        <button class="nav-btn active" data-view="all">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>
+          Übersicht
+        </button>
+        <button class="nav-btn" data-view="income">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v3M10.5 3.5L12 2l1.5 1.5"/></svg>
+          Einnahmen
+        </button>
+        <button class="nav-btn" data-view="expense">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M12 22v-3M10.5 20.5L12 22l1.5-1.5"/></svg>
+          Ausgaben
+        </button>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <h1 id="title">Alle Buchungen</h1>
+
+      <div class="columns">
+
+        <div class="left">
+
+          <div class="card chart-card">
+            <canvas id="chart"></canvas>
+            <p id="chart-empty" class="empty hidden">Noch keine Buchungen für das Diagramm.</p>
+          </div>
+
+          <div class="totals">
+            <div class="card total">
+              <h3>Gesamteinnahmen</h3>
+              <p class="amount" id="total-income">0,00 €</p>
+            </div>
+            <div class="card total">
+              <h3>Gesamtausgaben</h3>
+              <p class="amount" id="total-expense">0,00 €</p>
+            </div>
+          </div>
+
+          <div class="card balance-card">
+            <h3>Kontostand</h3>
+            <p class="amount" id="balance">0,00 €</p>
+            <label for="start-balance">Startkontostand (€)</label>
+            <input type="text" id="start-balance" inputmode="decimal" placeholder="z. B. 5000">
+          </div>
+
+          <div class="card month-card">
+            <div class="month-head">
+              <h3>Monatsübersicht</h3>
+              <input type="month" id="month-picker">
+            </div>
+            <div class="month-grid">
+              <div>
+                <span>Einnahmen (+)</span>
+                <strong class="green" id="month-income">0,00 €</strong>
+              </div>
+              <div>
+                <span>Ausgaben (−)</span>
+                <strong class="red" id="month-expense">0,00 €</strong>
+              </div>
+              <div>
+                <span>Saldo</span>
+                <strong id="month-saldo">0,00 €</strong>
+              </div>
+            </div>
+          </div>
+
+          <form class="card form" id="form">
+            <h3>Neue Buchung</h3>
+            <input type="text" id="desc" placeholder="Beschreibung" required>
+            <div class="row">
+              <input type="text" id="amount" inputmode="decimal" placeholder="Betrag" required>
+              <select id="type">
+                <option value="expense">Ausgabe (−)</option>
+                <option value="income">Einnahme (+)</option>
+              </select>
+              <input type="date" id="date" required>
+            </div>
+            <button type="submit">Hinzufügen</button>
+          </form>
+
+        </div>
+
+        <div class="right">
+          <h2>Verlauf <span id="count" class="count"></span></h2>
+          <ul id="list" class="list"></ul>
+          <p id="list-empty" class="empty hidden">Keine Buchungen vorhanden.</p>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
